@@ -82,16 +82,13 @@ export class RoleService {
 		}
 	}
 
-	update(id: number, updateRoleDto: UpdateRoleDto) {
-		return `This action updates a #${id} role`;
-	}
 
 	async remove(id: string) {
 		try {
 			const role = await this.roleRepository.findOneBy({ id });
 			if (!role) {
 				throw new NotFoundException(`The role with id: ${id} doesn´t exist.`)
-			}	
+			}
 			await this.roleRepository.remove(role);
 			return role;
 		} catch (error) {
@@ -101,5 +98,10 @@ export class RoleService {
 			this.logger.error(error);
 			this.dbErrorHandler.handleDBExceptions(error);
 		}
+	}
+
+
+	update(id: number, updateRoleDto: UpdateRoleDto) {
+		return `This action updates a #${id} role`;
 	}
 }
